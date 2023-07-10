@@ -1,0 +1,17 @@
+
+
+ .wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .avatar {
+    border: 5px solid white;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-size: contain;
+    position: absolute;
+  }
+

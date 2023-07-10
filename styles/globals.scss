@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* p, div, input {
+  margin: 0px !important;
+  padding:  0px !important;
+} */
+
+@layer utilities {
+  @variants responsive {
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  @apply overflow-hidden m-0 h-full;
+
+  &  > div:first-child{
+    height: 100%;
+  }
+}
+
+.link-active {
+  @apply bg-secondary-default;
+}
+
+.tab-link {
+  @apply cursor-pointer  inline-block text-gray-500 hover:text-gray-600 hover:bg-secondary-default rounded-t-lg py-3 px-4 text-sm font-medium text-center;
+}
+
+.display-medium {
+  @apply text-[20px] md:text-[24px] font-medium text-gray-900 leading-[44px] md:leading-[52px] lg:leading-[58px] lg:text-[30px];
+}
+.title-large {
+  @apply text-[14px] leading-[24px]  lg:text-[18px] lg:leading-[36px] text-gray-900 font-medium;
+}
+.title-medium {
+  @apply text-[12px] leading-[24px] lg:text-[16px] font-light text-gray-900;
+}
+.title-small {
+  @apply text-[10px] leading-[24px] lg:text-[14px] font-light text-gray-900;
+}
+.pill {
+  @apply flex items-center justify-center p-0 rounded-xl max-w-[75px] px-1;
+
+  &.active {
+    @apply bg-green-100
+  }
+  &.inactive {
+    @apply bg-orange-400 text-gray-900
+  }
+}
+
+tr td,
+span {
+  @apply text-[12px] leading-[24px] lg:text-[16px] font-light;
+}
+
+%skeleton-loader {
+  color: transparent !important;
+  appearance: none !important;
+  background-color: #eee !important;
+  border-color: #eee !important;
+
+  &::placeholder {
+    color: transparent !important;
+  }
+}
+
+@keyframes skeleton-loader {
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.skeleton-loader {
+  pointer-events: none;
+  animation: skeleton-loader 1s infinite alternate;
+
+  img, svg {
+    filter: grayscale(100) contrast(0%) brightness(1.8);
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  small,
+  span,
+  label,
+  input,
+  select,
+  .selected,
+  button,
+  th,
+  td,
+  i {
+    @extend %skeleton-loader;
+  }
+}
+
+.table-data {
+  @apply border-b border-slate-100   text-slate-500
+}
+
+.table-header {
+  @apply border-b  font-medium text-slate-400 text-left
+}
+
+
+.form-control {
+  font-size: 0.8rem;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+.form-control:focus-within {
+  @apply text-primary-default;
+}
+
+input[type="radio"] {
+  @apply  text-primary-default border border-primary-default;
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+
+  display: grid;
+  place-content: center;
+}
+
+input[type="radio"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  @apply bg-primary-default;
+}
+
+input[type="radio"]:checked::before {
+  transform: scale(1);
+}

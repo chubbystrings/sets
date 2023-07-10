@@ -1,9 +1,11 @@
+"use client"
+
 "use client";
 
 import React from "react";
 import { usePageName } from "@/hooks/usePageName";
 
-export default function Home() {
+export default function Reporting() {
   const { pathname } = usePageName();
   return (
     <section>

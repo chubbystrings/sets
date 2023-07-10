@@ -1,9 +1,10 @@
+
 "use client";
 
 import React from "react";
 import { usePageName } from "@/hooks/usePageName";
 
-export default function Home() {
+export default function Tasks() {
   const { pathname } = usePageName();
   return (
     <section>
@@ -14,3 +15,4 @@ export default function Home() {
     </section>
   );
 }
+
