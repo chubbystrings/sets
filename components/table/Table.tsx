@@ -50,13 +50,13 @@ export default function Table({ roles, isLoading}: {roles: Record<string, any>[]
   
   return (
     <>
-      <div className="not-prose relative bg-slate-50 rounded-xl overflow-hidden  hidden md:block">
+      <div className="not-prose relative bg-secondary-default rounded-xl overflow-hidden  hidden md:block">
         <div></div>
         <div className="relative rounded-xl overflow-auto">
           <div className="shadow-sm overflow-hidden mb-8 mt-4">
             <table className="border-collapse table-auto w-full title-small">
               <thead>
-                <tr>
+                <tr className="text-xs">
                   <th className="border-b font-medium p-4 pl-8 pt-0 pb-3 text-slate-400  text-left">
                     <input
                       type="checkbox"
@@ -64,9 +64,9 @@ export default function Table({ roles, isLoading}: {roles: Record<string, any>[]
                       onChange={handleCheckAll}
                     />
                   </th>
-                  <th className="border-b  font-medium p-4 pt-0 pb-3 text-slate-400  text-left">
+                  <th className="border-b  font-medium p-4 pt-0 pb-3 text-slate-400  text-left text-xs">
                     <div className="flex items-center title-small gap-2">
-                      <span className="text-slate-400">Name</span>
+                      <span className="text-slate-400 text-xs">Name</span>
                       {sortType === "desc" ? (
                         <span className="flex items-center title-medium cursor-pointer text-slate-400">
                           <BsArrowDownShort onClick={() => handleSortAsc()} />

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {  usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -23,6 +23,7 @@ import Logo from "../../public/Logomark.svg";
 
 export default function Navigation() {
   const pathname = usePathname();
+  const [isAd, setIsAd] = useState(true);
 
   return (
     <div className="flex flex-col gap-4">
@@ -52,7 +53,10 @@ export default function Navigation() {
               pathname == "/" ? "bg-secondary-default" : ""
             }`}
           >
-            <Link href="/" className="flex gap-2 items-center w-100 font-light title-medium">
+            <Link
+              href="/"
+              className="flex gap-2 items-center w-100 font-light title-medium"
+            >
               <span>
                 <HomeIcon />
               </span>
@@ -172,27 +176,30 @@ export default function Navigation() {
           </li>
         </ul>
       </div>
-      <div className="bg-secondary-default px-4 py-5">
-        <div>
-          <p className="text-sm font-medium text-gray-900">
-            New features available
-          </p>
-          <p className="text-sm font-normal text-gray-300">
-            Check out the new dashboard view. Pages now load faster.
-          </p>
+      {isAd && (
+        <div className="bg-secondary-default px-4 py-5">
+          <div>
+            <p className="text-sm font-medium text-gray-900">
+              New features available
+            </p>
+            <p className="text-sm font-normal text-gray-400">
+              Check out the new dashboard view. Pages now load faster.
+            </p>
+          </div>
+          <div className="w-full">
+            <Image
+              src={newFeatureImage}
+              alt="new feature image"
+              className="w-full"
+            />
+          </div>
+          <div className="flex items-center gap-3 text-xs font-medium text-gray-500 mt-3">
+            <p className="text-primary-default cursor-pointer" onClick={() => setIsAd(false)}>Dismiss</p>
+            <p>What's new ?</p>
+          </div>
         </div>
-        <div className="w-full">
-          <Image
-            src={newFeatureImage}
-            alt="new feature image"
-            className="w-full"
-          />
-        </div>
-        <div className="flex items-center gap-3 text-sm font-medium text-gray-500 mt-3">
-          <p>Dismiss</p>
-          <p>What's new ?</p>
-        </div>
-      </div>
+      )}
+
       <hr className="text-gray-200 " />
 
       <div className="flex items-start justify-between">

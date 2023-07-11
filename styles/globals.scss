@@ -59,13 +59,13 @@ body {
   @apply text-[10px] leading-[24px] lg:text-[14px] font-light text-gray-900;
 }
 .pill {
-  @apply flex items-center justify-center p-0 rounded-xl max-w-[75px] px-1;
+  @apply flex items-center justify-center p-0 rounded-xl max-w-[60px] px-1 capitalize;
 
   &.active {
     @apply bg-green-100
   }
   &.inactive {
-    @apply bg-orange-400 text-gray-900
+    @apply bg-orange-400 text-base-default
   }
 }
 
@@ -179,4 +179,8 @@ input[type="radio"]::before {
 
 input[type="radio"]:checked::before {
   transform: scale(1);
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }

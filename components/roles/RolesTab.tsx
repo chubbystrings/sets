@@ -5,6 +5,7 @@ import RoleCard from "../card/Role";
 import MailIcon from "../icons/MailIcon";
 import { FiDownloadCloud } from "react-icons/fi";
 import Table from "../table/Table";
+import Dropdown from "../dropdown/Dropdown";
 
 const RolesTab = ({
   isLoading,
@@ -14,6 +15,24 @@ const RolesTab = ({
   roles: Record<string, any>[];
 }) => {
   const [checked, setChecked] = useState("my-account");
+  const [addRole, setAddRole] = useState("");
+
+  const handleAddRole = (role: string) => {
+
+    const isExist = userRoles.some((r) => r.name === role )
+
+    if (isExist) {
+      notify("This role already added to user")
+    } else {
+      let newRole = roles.filter((r) => r.name === role)
+      if (newRole[0]) {
+       const r = { ...newRole[0], name: newRole[0].name, last_active: "06/2023" }
+        setUserRoles((prev) => [r, ...prev]);
+        notify("Role added to user", true);
+      }
+    }
+
+  }
 
   const [userRoles, setUserRoles] = useState<
     { name: string; last_active: string }[]
@@ -21,10 +40,17 @@ const RolesTab = ({
 
   const [selected, setIsSelected] = useState("Sales personnel");
 
-  const notify = (msg: string) =>
-    toast.error(msg, {
-      position: toast.POSITION.TOP_CENTER,
-    });
+  const notify = (msg: string, type?: boolean) => {
+    if (!type) {
+      toast.error(msg, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      toast.success(msg, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
 
   useEffect(() => {
     if (roles) {
@@ -118,12 +144,16 @@ const RolesTab = ({
             })}
             <div
               className="flex gap-1 items-center text-gray-500 text-sm cursor-pointer"
-              onClick={() => notify("sorry cant add try again later")}
             >
               <span className="text-gray-500 text-lg">
                 <IoIosAdd />
               </span>
-              <span>Add role to user</span>
+              <Dropdown
+                setValue={handleAddRole}
+                value={addRole}
+                title="Add role to user"
+                list={roles.map((l) => l.name)}
+              />
             </div>
           </div>
         </div>
@@ -132,7 +162,11 @@ const RolesTab = ({
       <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 items-start sm:items-center w-100 mt-4">
         <h2 className="text-gray-900 font-medium text-lg">User Roles</h2>
         <div>
-          <button type="button" className="outline-none border border-gray-300 rounded-lg bg-base-default flex gap-2 justify-center items-center text-gray-700 px-3 py-2" onClick={() => notify("Oops cannot download try later")} >
+          <button
+            type="button"
+            className="outline-none border border-gray-300 rounded-lg bg-base-default flex gap-2 justify-center items-center text-gray-700 px-3 py-2"
+            onClick={() => notify("Oops cannot download try later")}
+          >
             <span className="text-gray-700">
               <FiDownloadCloud />
             </span>
